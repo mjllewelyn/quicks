@@ -111,7 +111,8 @@ td .number{
   cursor: pointer;
 }
 table {
-  width: 370px;
+  width: 100%;
+  max-width: 370px;
   margin: auto;
   border-collapse: collapse;
 }
@@ -121,7 +122,8 @@ table, th, td {
 }
 
 table.score-sheet {
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   height: 334px;
   display: none;
   align-items: center;
@@ -223,6 +225,52 @@ table.scores th, table.scores td {
   cursor: pointer;
   background-color: white;
 }
+.center-screen{
+  width: 70%;
+  margin: auto;
+  padding: 20px 0;
+  background-color: lightblue;
+}
+.pnts-txt{
+  display: none;
+}
+.points-txt{
+  display: block;
+}
 ul{
   text-align: left;
+}
+@media screen and (max-width: 900px) {
+  .score-sheet{
+    margin-bottom: 20px;
+  }
+  .score-sheet td {
+    width: 10px;
+  }
+  .center-screen{
+    width: 100%;
+  }
+  body{
+    background-color: lightblue;
+  }
+  .modal-content {
+    width: 90%;
+  }
+  .table-container{
+    display: block;
+  }
+  .pnts-txt{
+    display: block;
+  }
+  .points-txt{
+    display: none;
+  }
+  @media screen and (max-width: 420px) {
+    .score-sheet td {
+      overflow-wrap: anywhere;
+    }
+    .score-sheet{
+      margin-bottom: 100px;
+    }
+  }
 }

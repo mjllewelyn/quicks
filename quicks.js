@@ -173,7 +173,8 @@ function fetchSheet() {
     var style = player == 1 ? `style='background-color:${colors[player-1]};'` : "";
     $(`#score-sheet-${player} tbody`).append($('<tr class="white-background">')
       .append($(`<td colspan=10 ${style} id="player-title-${player}">`).text($("#player-name-" + player).val()))
-      .append($('<td colspan=2 style="border: solid 3px black; border-bottom: none;">').text('5+')).append($('<td>').text('Points')));
+      .append($('<td colspan=2 style="border: solid 3px black; border-bottom: none;">').text('5+'))
+      .append($('<td>').append($('<span class="points-txt">').text('Points')).append($('<span class="pnts-txt">').text('Pnts'))));
     sheet.forEach((row, rowIndex) => {
       const $row = $('<tr>');
 
