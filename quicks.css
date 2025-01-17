@@ -1,0 +1,228 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 20px;
+  background-color: darkslateblue;
+}
+h1{
+  padding-top: 0;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+p {
+  margin: 0;
+}
+.dice-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px auto;
+}
+.dice {
+  display: grid;
+  grid-template-columns: repeat(3, 16px);
+  grid-template-rows: repeat(3, 16px);
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+  position: relative;
+}
+.pip {
+  width: 6px;
+  height: 6px;
+  background-color: black;
+  border-radius: 50%;
+  justify-self: center;
+  align-self: center;
+  visibility: hidden;
+}
+.number {
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+.show-number .number {
+  display: block;
+}
+.show-number .pip {
+  display: none;
+}
+td .number{
+  display: contents;
+}
+.red {
+  background-color: red;
+}
+.yellow {
+  background-color: yellow;
+}
+.green {
+  background-color: lime;
+}
+.blue {
+  background-color: #64b7f7;
+}
+.misses {
+  background-color: darkgray !important;
+  color: black !important;
+}
+.red.selected {
+  background-color: darkred;
+}
+.yellow.selected {
+  background-color: darkgoldenrod;
+}
+.green.selected {
+  background-color: forestgreen;
+}
+.blue.selected {
+  background-color: #3a8ecb;
+}
+.red.selected.white {
+  color: red !important;
+}
+.yellow.selected.white {
+  color: goldenrod !important;
+}
+.green.selected.white {
+  color: lime !important;
+}
+.blue.selected.white {
+  color: #64b7f7 !important;
+}
+.white {
+  background-color: white !important;
+  color: black !important;
+  cursor: pointer;
+}
+.white-background {
+  background-color: white !important;
+  color: black !important;
+}
+.selected{
+  color: white;
+  cursor: pointer;
+}
+table {
+  width: 370px;
+  margin: auto;
+  border-collapse: collapse;
+}
+table, th, td {
+  border: 1px solid black;
+  height: 70px;
+}
+
+table.score-sheet {
+  width: 600px;
+  height: 334px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+.score-sheet td {
+  border: 1px solid #000;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+  width: 50px;
+  height: 30px;
+}
+.score-sheet td.cross{
+  font-size: 30px;
+  padding: 0;
+}
+.table-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  justify-content: center;
+  gap: 20px;
+}
+
+table.players {
+  width: 100%;
+}
+table.players, th, td {
+  height: 30px;
+}
+
+table.scores{
+  height: 20px;
+  width: 50%;
+  table-layout: fixed;
+}
+table.scores th, table.scores td {
+  height: 10px;
+  width: 10px;
+}
+
+.button {
+  background-color: darkslateblue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.button-small {
+  padding: 5px 10px;
+  font-size: 12px;
+  margin: 2px;
+}
+.locked-cell {
+  border-left-width: 3px !important;
+}
+.cell-lock {
+  border-right-width: 3px !important;
+}
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+  text-align: center;
+}
+.close {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  background-color: white;
+}
+.close:hover,
+.close:focus {
+  color: #aaaaaa;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: white;
+}
+ul{
+  text-align: left;
+}

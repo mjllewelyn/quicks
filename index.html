@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quicks Dice</title>
+  <link rel="stylesheet" href="quicks.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <div class="modal" id="player-modal">
+    <div class="modal-content">
+      <h1>Quicks Dice</h1>
+      <p><a href="javascript:void(0)" class="open-rules">Rules</a></p><br>
+      <label>Players: </label>
+      <div class="button button-small" id="sub-player">-</div>
+      <input type="number" id="player-count" style="width: 30px;" min="1" max="6" value="2" disabled>
+      <div class="button button-small" id="add-player">+</div><br><br>
+      <label>Score Sheet: </label>
+      <select style="width: 200px;" id="score-sheet-selection">
+        <option value="original">Original</option>
+        <option value="mixedNumbers">Mixed Numbers</option>
+        <option value="mixedColors">Mixed Colors</option>
+        <option value="mixedNumbersAndColors">Mixed Numbers and Colors</option>
+      </select><br><br>
+      <table class="players" id="player-table">
+        <thead>
+          <th>Player</th>
+          <th>Color</th>
+          <th>Name</th>
+        </thead>
+        <tbody></tbody>
+      </table><br>
+      <div class="button" id="start-game">Start Game</div><br>
+    </div>
+  </div>
+
+  <div class="modal" id="rules-modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close closer">&times;</span>
+      <h1>Rules - Quicks Dice</h1>
+      <p><a href="javascript:void(0);" class="closer">Back to Game</a></p>
+      <h2>Objective</h2>
+      <ul>
+        <li>The objective of the game is to score the most points by crossing out the most squares</li>
+        <li>The game ends immediately when either two rows are locked, or when someone receives 4 misses (-20)</li>
+      </ul>
+      <h2>Setup</h2>
+      <ul>
+        <li>Select the number of players, colors, and type in names</li>
+        <li>Click Start Game</li>
+      </ul>
+      <h2>How to Play</h2>
+      <ul>
+        <li>On your turn (which has your name highlighted), you will click Roll Dice.</li>
+        <li>The first phase allows for any other players to cross off any one white square (which is the sum of the two white dice)</li>
+        <li>Once all other players have finished either crossing off or passing, click Other Players Have Selected White</li>
+        <li>Then if any white squares are available for you, then you may cross off one white square </li>
+        <li>Note: If no white squares are available this step is skipped</li>
+        <li>Note: If a square can be crossed off for white and a color, then the background will be white and the text will be the color</li>
+        <li>Note:If you choose to skip white, click the button Skip White</li>
+        <li>You may then cross of a color which is the sum of each of the white dice and a color</li>
+      </ul>
+      <h2>Misses</h2>
+      <ul>
+        <li>Every turn you must cross of either a white or color square, or you will take a miss</li>
+        <li>A miss counts as -5 points to your score, and if any one player recieves 4 misses (-20) then the game is over</li>
+        <li>Note: If it is not your turn, you are not obligated to cross off a white square</li>
+      </ul>
+      <h2>Locking a Row</h2>
+      <ul>
+        <li>At the end of each row there is a 5+ region. You must have at least 5 squares in that row to cross of the last number</li>
+        <li>Once someone crosses off the last number, they will recieve a bonus square and lock the color</li>
+        <li>When a color is locked, nobody may cross off any more squares of that color</li>
+        <li>Note: If a white number can lock a row, and multiple players can lock it, they all may, and all receive the bonus square</li>
+      </ul>
+      <h2>Scoring</h2>
+      <table class="scores">
+        <tbody>
+          <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+          <tr><td>1</td><td>3</td><td>6</td><td>10</td><td>15</td><td>21</td><td>28</td><td>36</td><td>45</td><td>55</td><td>66</td><td>78</td></tr>
+        </tbody>
+      </table>
+      </ul>
+    </div>
+  </div>
+
+  <div style="width: 70%; margin: auto; padding: 20px 0; background-color: aliceblue;">
+    <h1>Quicks Dice</h1>
+    <p><a href="javascript:void(0)" class="open-rules">Rules</a></p><br>
+    <div class="button button-small" onclick="toggleNumbers()" id="toggle">Switch to Numbers</div><br>
+    <div class="dice-container" id="diceContainer">
+      <div class="dice white-dice"><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="number" id="white-dice1"></div></div>
+      <div class="dice white-dice"><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="number" id="white-dice2"></div></div>
+      <div class="red dice"><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="number" id="red-dice"></div></div>
+      <div class="yellow dice"><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="number" id="yellow-dice"></div></div>
+      <div class="green dice"><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="number" id="green-dice"></div></div>
+      <div class="blue dice"><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="number" id="blue-dice"></div></div>
+    </div>
+    <table>
+      <tbody>
+        <td style="width: 20%;" class="white-background"><div class="number" id="white-sum"></div></td>
+        <td style="width: 20%;" class="red"><div class="number" id="red-sums"></div></td>
+        <td style="width: 20%;" class="yellow"><div class="number" id="yellow-sums"></div></td>
+        <td style="width: 20%;" class="green"><div class="number" id="green-sums"></div></td>
+        <td style="width: 20%;" class="blue"><div class="number" id="blue-sums"></div></td>
+      </tbody>
+    </table>
+    <br>
+    <div class="button" onclick="rollAllDice()" id="roll">Roll Dice</div>
+    <div class="button white" style="border: 1px solid black; display: none;" onclick="skipColor()" id="skip-color">Skip White</div>
+    <div class="button misses" style="display: none;" onclick="missedButton()" id="missed-button">Take Miss</div>
+    <br>
+    <p id="instructions" style="font-weight: bold;">Roll the Dice to Start</p><br>
+    <div class="table-container">
+      <table class="score-sheet" id="score-sheet-1"><tbody></tbody></table>
+      <table class="score-sheet" id="score-sheet-2"><tbody></tbody></table>
+      <table class="score-sheet" id="score-sheet-3"><tbody></tbody></table>
+      <table class="score-sheet" id="score-sheet-4"><tbody></tbody></table>
+    </div>
+  </div>
+  <script src="scoreSheets.js"></script>
+  <script src="quicks.js"></script>
+</body>
+</html>
