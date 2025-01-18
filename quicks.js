@@ -130,7 +130,7 @@ function calculateNumberTable() {
 function selectCell(cells, white = false) {
   cells.each(function() {
     cell = $(this);
-    if (!cell.hasClass("cross") && cell.data("pos") > rowPos(cell) && (!cell.hasClass("locked-cell") || $(`.cross[data-row=${cell.data("row")}]`).length >= 5)){
+    if (!cell.hasClass("cross") && cell.data("pos") > rowPos(cell) && (!cell.hasClass("locked-cell") || $(`.cross[data-row=${cell.data("row")}][data-player=${cell.data("player")}]`).length >= 5)){
       if (white)
         cell.addClass("white");
       else
@@ -216,6 +216,7 @@ function crossOffCell(cell) {
     if ($cell.hasClass("locked-cell")){
       $(`.${color}.dice`).addClass("misses");
       $(`.${color}.dice`).find(".pip").css("visibility", "hidden");
+      $(`.${color}.dice`).find(".number").css("visibility", "hidden");
       $(`#${color}-sums`).text("").parent().addClass("misses");
       calculateScore(color, player);
       $(`#${color}-lock-${player}`).text("X").addClass("cross");
